@@ -1,0 +1,4 @@
+ Mon projet est intitulé PersonalContact, il permet de concerver ces contacts mobiles
+dans une DataBase à fin d'éviter la perte total de ces contacts importants après que
+celui-ci est égaré sa carte SIM ou encore sa puce téléphonique. Ainsi notre application
+concerve la photo, le nom, l'adresse, le téléphone et l'e-mail de vos contacts.

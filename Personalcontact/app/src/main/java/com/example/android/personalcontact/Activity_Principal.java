@@ -20,7 +20,6 @@ public class Activity_Principal extends ActionBarActivity {
 
         final Button suiButton = (Button) findViewById(R.id.button);
         suiButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_Principal.this, MainActivity.class);

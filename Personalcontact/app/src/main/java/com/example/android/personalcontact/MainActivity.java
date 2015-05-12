@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
     private  static final int EDIT = 0;
     private  static final int DELETE = 1;
+    private ShareActionProvider mShareActionProvider;
 
     EditText nameTxt, phoneTxt, emailTxt, addressTxt;
    ImageView contactImageImgView;
@@ -40,7 +42,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         nameTxt = (EditText) findViewById(R.id.txtName);
         phoneTxt = (EditText) findViewById(R.id.txtPhone);
         emailTxt = (EditText) findViewById(R.id.txtEmail);
@@ -188,13 +189,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -207,5 +201,30 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        /** Inflating the current activity's menu with res/menu/items.xml */
+        getMenuInflater().inflate(R.menu.items, menu);
+
+        /** Getting the actionprovider associated with the menu item whose id is share */
+        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_settings).getActionProvider();
+
+        /** Setting a share intent */
+        mShareActionProvider.setShareIntent(getDefaultShareIntent());
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    /** Returns a share intent */
+    private Intent getDefaultShareIntent(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT");
+        intent.putExtra(Intent.EXTRA_TEXT,"Extra Text");
+        return intent;
     }
 }
